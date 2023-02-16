@@ -30,6 +30,12 @@ app.get('/api/activities/new', (req, res) => {
 app.get('/api/activities/delete', (req, res) => {
   services.deleteAllActivites(req, res);
 });
+app.post('/api/activities/animal-choice', (req, res) => {
+  services.processAnimalChoice(req, res);
+});
+app.get('/api/activities/new-animals', (req, res) => {
+  services.getNewAnimals(req, res);
+});
 
 app.listen(PORT, () => { // start server and listen on specified port
   console.log(`App is running on ${PORT}`) // confirm server is running and log port to the console
