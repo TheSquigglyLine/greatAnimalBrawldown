@@ -16,7 +16,7 @@ const Animals = ({ animateButtonClick , name1 , name2 , isSlidOut , wikilink1, w
             />
         <div className="button-Container">
           <button id="Right-Button" className={`right-button ${isSlidOut ? 'slide-out' : ''}`} onClick={(event) => { animateButtonClick(event, name2); }}>{ name2 || "Click To Start" }</button>
-          <a href = {wikilink1} style={{ marginTop: '12px' }} target="_blank" rel="noreferrer">Wikipedia Link</a>
+          <a href = {wikilink2} style={{ marginTop: '12px' }} target="_blank" rel="noreferrer">Wikipedia Link</a>
         </div>
     </div>
   )
