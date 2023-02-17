@@ -31,11 +31,11 @@ function App() {
         setAnimal2Name(data[1].name)
         console.log(data[1].name)
       })
-    /* activityService
+    activityService
       .getNewActivity()
       .then(data => {
         setNewActivity(data.activity)
-      }) */
+      }) 
   }, [])
 
   const handleNewActivity = () => {
