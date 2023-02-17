@@ -53,8 +53,9 @@ const deleteAllActivites = (req, res) => {
 
 const getEloRatings = (name1, name2) => {
   const eloString = `SELECT elo FROM animals WHERE name IN (${name1}, ${name2})`;
+  console.log(eloString);
   return pool.query(eloString)
-    .then(result => result.rows.map(row => row.elo))
+    .then(result => console.log(results.rows))//result.rows.map(row => row.elo)
     .catch(err => console.log(err));
 }
 
