@@ -137,7 +137,7 @@ const processAnimalChoice = (req, res) => {
 const getNewAnimals = (req, res) => {
   const randomquery = `SELECT name FROM animals ORDER BY random() LIMIT 2`;
   pool.query(randomquery)
-    .then(result => console.log(result)) //res.json(result)
+    .then(result => res.json(result.rows)) 
     .catch(err => console.log(err));
   console.log(res)
 
