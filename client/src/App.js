@@ -71,7 +71,7 @@ function App() {
       })
   }
 
-  const animateButtonClick = (event) => {
+  const animateButtonClick = (event, choice) => {
     const clickedButton = event.target;
     if (isSlidOut) {
         return;
@@ -81,6 +81,7 @@ function App() {
 
         setTimeout(() => {
             setIsSlidOut(true);
+            handleAnimalChoice(choice);
         }, 1000);
   } 
 
@@ -128,7 +129,7 @@ function App() {
     <h3 className="subheader">
       Discovering the fiercest creatures on Earth, one brawl at a time.
     </h3>
-    <Animals handleAnimalChoice={handleAnimalChoice} animateButtonClick={animateButtonClick} name1={animal1Name} name2={animal2Name} isSlidOut={isSlidOut} />
+    <Animals animateButtonClick={animateButtonClick} name1={animal1Name} name2={animal2Name} isSlidOut={isSlidOut} />
   </div>
   );
 }
