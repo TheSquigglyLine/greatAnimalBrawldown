@@ -23,6 +23,7 @@ function App() {
       .then(data => {
         setActivities(data.activities)
       }) */
+      
     /* activityService
       .getAnimalChoices()
       .then(data => {
