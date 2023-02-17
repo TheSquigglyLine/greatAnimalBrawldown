@@ -131,7 +131,10 @@ function App() {
     <h3 className="subheader">
       Discovering the fiercest creatures on Earth, one brawl at a time.
     </h3>
-    <Animals animateButtonClick={animateButtonClick} name1={animal1Name} name2={animal2Name} isSlidOut={isSlidOut} />
+    <div className="body">
+      <Animals animateButtonClick={animateButtonClick} name1={animal1Name} name2={animal2Name} isSlidOut={isSlidOut} />
+    </div>
+    
   </div>
   );
 }
