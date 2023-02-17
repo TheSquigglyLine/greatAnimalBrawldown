@@ -135,13 +135,18 @@ const processAnimalChoice = (req, res) => {
 }
 
 const getNewAnimals = (req, res) => {
-  getMinMaxElo()
+  const randomquery = `SELECT name FROM animals WHERE elo ORDER BY random() LIMIT 2`;
+  pool.query(randomquery)
+    .then(result => res.json(result))
+    .catch(err => console.log(err));
+
+  /* getMinMaxElo()
     .then(spread => {
       getRandomAnimal(spread[0],spread[1])
         .then(result => res.json(result))
         .catch(err => console.log(err))
     })
-    .catch(error => console.log(error));
+    .catch(error => console.log(error)); */
 }
 
 

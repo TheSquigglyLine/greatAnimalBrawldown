@@ -41,7 +41,7 @@ const postAnimalChoice = (animal1, animal2, choice) => {
 
 const getAnimalChoices = () => {
   const request = axios.get(`${baseUrl}/new-animals`)
-  console.log(request)
+  console.log(request.response)
   return request.then(response => response.data)
 }
 
