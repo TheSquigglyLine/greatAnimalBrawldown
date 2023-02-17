@@ -77,7 +77,7 @@ const updateEloRating = (animal1Elo, animal2Elo, animal1Win, K = 32) => {
   console.log(player1NewElo);
   console.log(player2NewElo);
   // Return updated Elo ratings
-  return [player1NewElo, player2NewElo];
+  return [Math.round(player1NewElo), Math.round(player2NewElo)];
 }
 
 const getMinMaxElo = () => {
