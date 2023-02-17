@@ -17,6 +17,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/api/activities', (req, res) => { // route root directory ('/' is this file (app.js))
   services.getNewAnimals(req, res);
 });
+app.post('/api/activities/animal-choice', (req, res) => {
+  services.processAnimalChoice(req, res);
+});
 app.get('/api/activities/new-animals', (req, res) => {
   services.getNewAnimals(req, res);
 });
