@@ -65,7 +65,7 @@ const updateEloRating = (animal1Elo, animal2Elo, animal1Win, K = 32) => {
   console.log(animal1Elo);
   console.log(animal2Elo);
   const expectedScore = (rating1, rating2) => 1 / (1 + Math.pow(10, (rating2 - rating1) / 400)); // expected score of player 1
-  console.log(expectedScore);
+  
   // Calculate actual scores based on game result
   const player1Score = animal1Win ? 1 : 0;
   const player2Score = animal1Win ? 0 : 1;
@@ -74,6 +74,7 @@ const updateEloRating = (animal1Elo, animal2Elo, animal1Win, K = 32) => {
   const player1NewElo = animal1Elo + K * (player1Score - expectedScore(animal1Elo, animal2Elo));
   const player2NewElo = animal2Elo + K * (player2Score - expectedScore(animal2Elo, animal1Elo));
 
+  console.log(player1NewElo);
   console.log(player1NewElo);
   // Return updated Elo ratings
   return [player1NewElo, player2NewElo];
@@ -111,16 +112,14 @@ const processAnimalChoice = (req, res) => {
     .then(ratings => {
       //eloratings.push(...ratings);
       console.log(ratings);
-      updateEloRating(ratings[0].elo, ratings[1].elo, animal1win)
-        .then(newRatings => {
-          // Update Elo ratings in database
-          console.log(newRatings);
-          const updateQuery = `UPDATE animals SET elo = ${newRatings[0]} WHERE name = '${animal1Str}'; UPDATE animals SET elo = ${newRatings[1]} WHERE name = '${animal2Str}';`
-          pool.query(updateQuery)
-            .then(result => console.log(json(result.rows)))
-            .catch(err => console.log(err))
-        })
-        .catch(error => console.log(error))
+      const newRatings = updateEloRating(ratings[0].elo, ratings[1].elo, animal1win)
+        
+      console.log(newRatings);
+      const updateQuery = `UPDATE animals SET elo = ${newRatings[0]} WHERE name = '$1'; UPDATE animals SET elo = ${newRatings[1]} WHERE name = '$2';`
+      const values = [animal1Str, animal2Str]
+      pool.query(updateQuery, values)
+        .then(result => console.log(json(result)))
+        .catch(err => console.log(err))
     })
     .catch(error => console.log(error));
 
