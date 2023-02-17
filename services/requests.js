@@ -75,7 +75,7 @@ const updateEloRating = (animal1Elo, animal2Elo, animal1Win, K = 32) => {
   const player2NewElo = animal2Elo + K * (player2Score - expectedScore(animal2Elo, animal1Elo));
 
   console.log(player1NewElo);
-  console.log(player1NewElo);
+  console.log(player2NewElo);
   // Return updated Elo ratings
   return [player1NewElo, player2NewElo];
 }
@@ -115,10 +115,10 @@ const processAnimalChoice = (req, res) => {
       const newRatings = updateEloRating(ratings[0].elo, ratings[1].elo, animal1win)
         
       console.log(newRatings);
-      const update1Query = `UPDATE animals SET elo = ${newRatings[0]} WHERE name = '$1'`
-      const update2Query = ` UPDATE animals SET elo = ${newRatings[1]} WHERE name = '$!'`
-      const value1 = [animal1Str]
-      const value2 = [animal2Str]
+      const update1Query = `UPDATE animals SET elo = '$1' WHERE name = '$2'`
+      const update2Query = `UPDATE animals SET elo = '$1' WHERE name = '$2'`
+      const value1 = [newRatings[0], animal1Str]
+      const value2 = [newRatings[1], animal2Str]
       pool.query(update1Query, value1)
         .then(result => console.log(json(result)))
         .catch(err => console.log(err))
