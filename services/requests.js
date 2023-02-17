@@ -80,22 +80,19 @@ const updateEloRating = (animal1Elo, animal2Elo, animal1Win, K = 32) => {
   return [Math.round(player1NewElo), Math.round(player2NewElo)];
 }
 
-const getMinMaxElo = () => {
+const getRandomElo = () => {
   const minMaxQuery = 'SELECT MIN(elo), MAX(elo) FROM animals';
   return pool.query(minMaxQuery)
     .then(res => {
       const min = res.rows[0].min;
       const max = res.rows[0].max;
-      return [min, max];
+      console.log(min);
+      console.log(max);
+      const randomElo = Math.floor(Math.random() * (max - min +1) + min);
+      console.log(randomElo);
+      return randomElo;
     })
     .catch(err => console.error(err));
-}
-
-const getRandomAnimal = (minElo, maxElo) => {
-  const randomquery = `SELECT name FROM animals WHERE elo BETWEEN ${minElo} AND ${maxElo} ORDER BY random() LIMIT 2`;
-  return pool.query(randomquery)
-    .then(result => result.rows.map(row => row.name))
-    .catch(err => console.log(err));
 }
 
 const processAnimalChoice = (req, res) => {
@@ -129,16 +126,18 @@ const processAnimalChoice = (req, res) => {
     .catch(error => console.log(error));
 
   
-    const randomquery = `SELECT name FROM animals ORDER BY random() LIMIT 2`;
-    pool.query(randomquery)
-      .then(result => res.json(result.rows)) 
-      .catch(err => console.log(err));
+  const elo = getRandomElo();
+  const getNewAnimalsQuery = `SELECT name, wikilink FROM animals ORDER BY ABS(elo - $1) LIMIT 2`;
+  pool.query(getNewAnimalsQuery,elo)
+    .then(result => res.json(result.rows)) 
+    .catch(err => console.log(err));
 
 }
 
 const getNewAnimals = (req, res) => {
-  const randomquery = `SELECT name FROM animals ORDER BY random() LIMIT 2`;
-  pool.query(randomquery)
+  const elo = getRandomElo();
+  const getNewAnimalsQuery = `SELECT name, wikilink FROM animals ORDER BY ABS(elo - $1) LIMIT 2`;
+  pool.query(getNewAnimalsQuery,elo)
     .then(result => res.json(result.rows)) 
     .catch(err => console.log(err));
 
