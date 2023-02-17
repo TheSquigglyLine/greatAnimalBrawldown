@@ -111,7 +111,7 @@ const processAnimalChoice = (req, res) => {
     .then(ratings => {
       //eloratings.push(...ratings);
       console.log(ratings);
-      updateEloRating(ratings[0], ratings[1], animal1win)
+      updateEloRating(ratings[0].elo, ratings[1].elo, animal1win)
         .then(newRatings => {
           // Update Elo ratings in database
           const updateQuery = `UPDATE animals SET elo = ${newRatings[0]} WHERE name = '${animal1Str}'; UPDATE animals SET elo = ${newRatings[1]} WHERE name = '${animal2Str}';`
