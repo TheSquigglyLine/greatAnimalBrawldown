@@ -97,7 +97,7 @@ const getRandomAnimal = (minElo, maxElo) => {
 
 const processAnimalChoice = (req, res) => {
   const { animal1, animal2, choice } = req.body;
-
+  console.log(req.body);
   const animal1Str = String(animal1);
   const animal2Str = String(animal2);
   const choiceStr = String(choice);
@@ -107,10 +107,11 @@ const processAnimalChoice = (req, res) => {
 
   const animal1win = (choiceStr === animal1Str) ? 1 : 0;
 
-  const eloratings = [];
+  console.log(animal1win);
   getEloRatings(animal1Str, animal2Str)
     .then(ratings => {
       //eloratings.push(...ratings);
+      console.log(ratings);
       updateEloRating(ratings[0], ratings[1], animal1win)
         .then(newRatings => {
           // Update Elo ratings in database
