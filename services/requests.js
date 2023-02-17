@@ -115,9 +115,14 @@ const processAnimalChoice = (req, res) => {
       const newRatings = updateEloRating(ratings[0].elo, ratings[1].elo, animal1win)
         
       console.log(newRatings);
-      const updateQuery = `UPDATE animals SET elo = ${newRatings[0]} WHERE name = '$1'; UPDATE animals SET elo = ${newRatings[1]} WHERE name = '$2';`
-      const values = [animal1Str, animal2Str]
-      pool.query(updateQuery, values)
+      const update1Query = `UPDATE animals SET elo = ${newRatings[0]} WHERE name = '$1'`
+      const update2Query = ` UPDATE animals SET elo = ${newRatings[1]} WHERE name = '$!'`
+      const value1 = [animal1Str]
+      const value2 = [animal2Str]
+      pool.query(update1Query, value1)
+        .then(result => console.log(json(result)))
+        .catch(err => console.log(err))
+      pool.query(update2Query, value2)
         .then(result => console.log(json(result)))
         .catch(err => console.log(err))
     })
