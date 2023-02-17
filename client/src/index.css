@@ -189,19 +189,19 @@ body {
   background: #0086E0;
 }
 .left-button.slide-out {
-  transform: translateX(1000%);
+  transform: translateX(-1000%);
 }
 
 .right-button.slide-out {
-  transform: translateX(-1000%);
+  transform: translateX(1000%);
 }
 
 .left-button.slide-in {
-  transform: translateX(-1000%);
+  transform: translateX(1000%);
 }
 
 .right-button.slide-in {
-  transform: translateX(1000%);
+  transform: translateX(-1000%);
 }
 
 .left-button:hover,
