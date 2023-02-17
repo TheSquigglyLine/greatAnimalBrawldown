@@ -14,22 +14,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-app.get('/api/activities', (req, res) => { // route root directory ('/' is this file (app.js))
 
-  services.getAllActivities(req, res);
-});
-
-app.post('/api/activities', (req, res) => {
-  services.addActivityToDB(req, res);
-});
-
-app.get('/api/activities/new', (req, res) => {
-  services.getSingleActivity(req, res);
-});
-
-app.get('/api/activities/delete', (req, res) => {
-  services.deleteAllActivites(req, res);
-});
 app.post('/api/activities/animal-choice', (req, res) => {
   services.processAnimalChoice(req, res);
 });
