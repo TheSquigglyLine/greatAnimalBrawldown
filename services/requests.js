@@ -55,7 +55,7 @@ const getEloRatings = (name1, name2) => {
   const eloString = `SELECT elo FROM animals WHERE name IN ($1, $2)`;
   const values = [name1, name2];
   return pool.query(eloString, values)
-    .then(result => json(result.rows))
+    .then(result => result.rows)
     .catch(err => console.log(err));
 }
 
