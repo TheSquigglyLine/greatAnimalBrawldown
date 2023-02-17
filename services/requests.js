@@ -107,25 +107,33 @@ const processAnimalChoice = (req, res) => {
   console.log(animal1win);
   getEloRatings(animal1Str, animal2Str)
     .then(ratings => {
-      //eloratings.push(...ratings);
       console.log(ratings);
       const newRatings = updateEloRating(ratings[0].elo, ratings[1].elo, animal1win)
         
       console.log(newRatings);
+
       const update1Query = `UPDATE animals SET elo = $1 WHERE name = $2`
       const update2Query = `UPDATE animals SET elo = $1 WHERE name = $2`
+
+      const insertVoteQuery = 'INSERT INTO ratings (animal_1_name, animal_2_name, animal_1_elo, animal_2_elo, animal_1_win) VALUES ($1, $2, $3, $4, $5)'
+      const values = [animal1Str, animal2Str, newRatings[0], newRatings[1], animal1win]
+      pool.query(insertVoteQuery, values)
+        .then(result => console.log(result))
+        .catch(err => console.log(err))
+
       const value1 = [newRatings[0], animal1Str]
       const value2 = [newRatings[1], animal2Str]
+
       pool.query(update1Query, value1)
         .then(result => console.log(result))
         .catch(err => console.log(err))
+
       pool.query(update2Query, value2)
         .then(result => console.log(result))
         .catch(err => console.log(err))
     })
     .catch(error => console.log(error));
 
-  
     getRandomElo()
     .then(elo => {
       console.log(elo)
@@ -135,7 +143,6 @@ const processAnimalChoice = (req, res) => {
         .catch(err => console.log(err));
     })
     .catch(err => console.log(err));
-
 }
 
 const getNewAnimals = (req, res) => {
@@ -148,14 +155,6 @@ const getNewAnimals = (req, res) => {
         .catch(err => console.log(err));
     })
     .catch(err => console.log(err));
-
-  /* getMinMaxElo()
-    .then(spread => {
-      getRandomAnimal(spread[0],spread[1])
-        .then(result => res.json(result))
-        .catch(err => console.log(err))
-    })
-    .catch(error => console.log(error)); */
 }
 
 
