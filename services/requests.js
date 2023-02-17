@@ -126,20 +126,27 @@ const processAnimalChoice = (req, res) => {
     .catch(error => console.log(error));
 
   
-  const elo = getRandomElo();
-  const getNewAnimalsQuery = `SELECT name, wikilink FROM animals ORDER BY ABS(elo - $1) LIMIT 2`;
-  pool.query(getNewAnimalsQuery,elo)
-    .then(result => res.json(result.rows)) 
+    getRandomElo()
+    .then(elo => {
+      console.log(elo)
+      const getNewAnimalsQuery = `SELECT name, wikilink FROM animals ORDER BY ABS(elo - $1) LIMIT 2`
+      pool.query(getNewAnimalsQuery,[elo])
+        .then(result => res.json(result.rows)) 
+        .catch(err => console.log(err));
+    })
     .catch(err => console.log(err));
 
 }
 
 const getNewAnimals = (req, res) => {
-  const elo = [getRandomElo()];
-  console.log(elo);
-  const getNewAnimalsQuery = `SELECT name, wikilink FROM animals ORDER BY ABS(elo - $1) LIMIT 2`;
-  pool.query(getNewAnimalsQuery,elo)
-    .then(result => res.json(result.rows)) 
+  getRandomElo()
+    .then(elo => {
+      console.log(elo)
+      const getNewAnimalsQuery = `SELECT name, wikilink FROM animals ORDER BY ABS(elo - $1) LIMIT 2`
+      pool.query(getNewAnimalsQuery,[elo])
+        .then(result => res.json(result.rows)) 
+        .catch(err => console.log(err));
+    })
     .catch(err => console.log(err));
 
   /* getMinMaxElo()
