@@ -135,7 +135,8 @@ const processAnimalChoice = (req, res) => {
 }
 
 const getNewAnimals = (req, res) => {
-  const elo = getRandomElo();
+  const elo = [getRandomElo()];
+  console.log(elo);
   const getNewAnimalsQuery = `SELECT name, wikilink FROM animals ORDER BY ABS(elo - $1) LIMIT 2`;
   pool.query(getNewAnimalsQuery,elo)
     .then(result => res.json(result.rows)) 
