@@ -74,14 +74,14 @@ function App() {
   const animateButtonClick = (event, choice) => {
     const clickedButton = event.target;
     if (isSlidOut) {
-        return;
+        return
     } else {}
 
         clickedButton.style.backgroundColor = '#32a852';
 
         setTimeout(() => {
-            setIsSlidOut(true);
-            handleAnimalChoice(choice);
+            setIsSlidOut(true)
+            handleAnimalChoice(choice)
         }, 1000);
   } 
 
@@ -91,7 +91,7 @@ function App() {
       .then(data => {
         setAnimal1Name(data[0].name)
         setAnimal2Name(data[1].name)
-        setIsSlidOut(false);
+        setIsSlidOut(false)
       })
   }
 
