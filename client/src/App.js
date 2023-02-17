@@ -88,8 +88,8 @@ function App() {
     activityService
       .postAnimalChoice(animal1Name,animal2Name,choice)
       .then(data => {
-        setAnimal1Name(data.name1)
-        setAnimal2Name(data.name2)
+        setAnimal1Name(data[0].name)
+        setAnimal2Name(data[1].name)
         setIsSlidOut(false);
       })
   }

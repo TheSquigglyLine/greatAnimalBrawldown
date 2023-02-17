@@ -120,10 +120,10 @@ const processAnimalChoice = (req, res) => {
       const value1 = [newRatings[0], animal1Str]
       const value2 = [newRatings[1], animal2Str]
       pool.query(update1Query, value1)
-        .then(result => console.log(json(result)))
+        .then(result => console.log(result))
         .catch(err => console.log(err))
       pool.query(update2Query, value2)
-        .then(result => console.log(json(result)))
+        .then(result => console.log(result))
         .catch(err => console.log(err))
     })
     .catch(error => console.log(error));
