@@ -26,10 +26,10 @@ function App() {
     activityService
       .getAnimalChoices()
       .then(data => {
-        setAnimal1Name(data.name1)
-        console.log(data.name1)
-        setAnimal2Name(data.name2)
-        console.log(data.name2)
+        setAnimal1Name(data[0].name)
+        console.log(data[0].name)
+        setAnimal2Name(data[1].name)
+        console.log(data[1].name)
       })
     /* activityService
       .getNewActivity()
