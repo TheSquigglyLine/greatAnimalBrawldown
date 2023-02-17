@@ -80,25 +80,36 @@ const processAnimalChoice = (req, res) => {
     })
     .catch(error => console.log(error));
 
-    getRandomElo()
+    const randomquery = `SELECT name, wikilink FROM animals ORDER BY random() LIMIT 2`;
+    pool.query(randomquery)
+      .then(result => res.json(result.rows)) 
+      .catch(err => console.log(err));
+
+    /* getRandomElo()
     .then(elo => {
       const getNewAnimalsQuery = `SELECT name, wikilink FROM animals ORDER BY ABS(elo - $1) LIMIT 2`
       pool.query(getNewAnimalsQuery,[elo])
         .then(result => res.json(result.rows)) 
         .catch(err => console.log(err));
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log(err)); */
 }
 
 const getNewAnimals = (req, res) => {
-  getRandomElo()
+  const randomquery = `SELECT name, wikilink FROM animals ORDER BY random() LIMIT 2`;
+  pool.query(randomquery)
+    .then(result => res.json(result.rows)) 
+    .catch(err => console.log(err));
+
+  /* getRandomElo()
     .then(elo => {
       const getNewAnimalsQuery = `SELECT name, wikilink FROM animals ORDER BY ABS(elo - $1) LIMIT 2`
       pool.query(getNewAnimalsQuery,[elo])
         .then(result => res.json(result.rows)) 
         .catch(err => console.log(err));
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log(err)); */
+    
 }
 
 
