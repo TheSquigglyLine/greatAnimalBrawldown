@@ -11,7 +11,7 @@ const Animals = ({ handleAnimalChoice , animateButtonClick , name1 , name2 , isS
             style={{ width: 50, height: 50 }}
             alt="Crossed Swords Battle"
             />
-        <button id="Right-Button" className={`right-button ${isSlidOut ? 'slide-out' : ''}`} onClick={(event) => { animateButtonClick(event); handleAnimalChoice({ name2 }); }}>{ name2 || "Click To Start" }</button>
+        <button id="Right-Button" className={`right-button ${isSlidOut ? 'slide-out' : ''}`} onClick={(event) => { animateButtonClick(event); handleAnimalChoice(name2); }}>{ name2 || "Click To Start" }</button>
     </div>
   )
 }

@@ -52,9 +52,7 @@ const deleteAllActivites = (req, res) => {
 }
 
 const getEloRatings = (name1, name2) => {
-  const escName1 = pool.escape(name1);
-  const escName2 = pool.escape(name2);
-  const eloString = `SELECT elo FROM animals WHERE name IN (${escName1}, ${escName2})`;
+  const eloString = `SELECT elo FROM animals WHERE name IN (${name1}, ${name2})`;
   return pool.query(eloString)
     .then(result => result.rows.map(row => row.elo))
     .catch(err => console.log(err));
@@ -102,9 +100,6 @@ const processAnimalChoice = (req, res) => {
   const animal2Str = String(animal2);
   const choiceStr = String(choice);
   
-  const escAnimal1 = pool.escape(animal1Str);
-  const escAnimal2 = pool.escape(animal2Str);
-
   const animal1win = (choiceStr === animal1Str) ? 1 : 0;
 
   console.log(animal1win);
@@ -115,7 +110,7 @@ const processAnimalChoice = (req, res) => {
       updateEloRating(ratings[0], ratings[1], animal1win)
         .then(newRatings => {
           // Update Elo ratings in database
-          const updateQuery = `UPDATE animals SET elo = ${newRatings[0]} WHERE name = '${escAnimal1}'; UPDATE animals SET elo = ${newRatings[1]} WHERE name = '${escAnimal2}';`
+          const updateQuery = `UPDATE animals SET elo = ${newRatings[0]} WHERE name = '${animal1Str}'; UPDATE animals SET elo = ${newRatings[1]} WHERE name = '${animal2Str}';`
           pool.query(updateQuery)
             .then(result => console.log(json(result.rows)))
             .catch(err => console.log(err))
