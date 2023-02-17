@@ -116,7 +116,7 @@ const processAnimalChoice = (req, res) => {
           // Update Elo ratings in database
           const updateQuery = `UPDATE animals SET elo = ${newRatings[0]} WHERE name = '${escAnimal1}'; UPDATE animals SET elo = ${newRatings[1]} WHERE name = '${escAnimal2}';`
           pool.query(updateQuery)
-            .then(result => console.log(result))
+            .then(result => console.log(json(result.rows)))
             .catch(err => console.log(err))
         })
         .catch(error => console.log(error))
@@ -124,13 +124,10 @@ const processAnimalChoice = (req, res) => {
     .catch(error => console.log(error));
 
   
-  getMinMaxElo()
-    .then(spread => {
-      getRandomAnimal(spread[0],spread[1])
-        .then(result => res.json(result))
-        .catch(err => console.log(err))
-    })
-    .catch(error => console.log(error));
+    const randomquery = `SELECT name FROM animals ORDER BY random() LIMIT 2`;
+    pool.query(randomquery)
+      .then(result => res.json(result.rows)) 
+      .catch(err => console.log(err));
 
 }
 
@@ -139,7 +136,6 @@ const getNewAnimals = (req, res) => {
   pool.query(randomquery)
     .then(result => res.json(result.rows)) 
     .catch(err => console.log(err));
-  console.log(res)
 
   /* getMinMaxElo()
     .then(spread => {
