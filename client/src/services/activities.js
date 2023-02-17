@@ -13,7 +13,7 @@ const getAllActivities = () => {
 
 const getNewActivity = () => {
   const request = axios.get(`${baseUrl}/new`)
-  return request.then(response => console.log(response.data))
+  return request.then(response => response.data)
 }
 
 const addActivity = activity => {
@@ -41,7 +41,8 @@ const postAnimalChoice = (animal1, animal2, choice) => {
 
 const getAnimalChoices = () => {
   const request = axios.get(`${baseUrl}/new-animals`)
-  return request.then(response => console.log(response.data))
+  console.log(request.response)
+  return request.then(response => response.data)
 }
 
 export default { getAllActivities, getNewActivity, addActivity, deleteAllActivities, postAnimalChoice, getAnimalChoices }
