@@ -1,122 +1,6 @@
-/* @import url('https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap');
-
-body {  
-  background-color: #23272b;
-  font-family: Arial, Helvetica, sans-serif;
+h1 {
+  margin-top: 5px;
 }
-
-.container {
-  margin: 2rem auto;
-  max-width: 600px;
-  background-color: #fbfbfb;
-  border-radius: 20px;
-}
-
-.suggestionSection {
-  height: 400px;
-}
-
-#question {
-  margin-top: 4rem;
-  color: #33383e;
-  font-family: 'Permanent Marker';
-  font-size: 3rem;
-}
-
-.options {
-  margin: 1rem 0 4rem .25rem
-}
-
-
-#activityCount {
-  padding-left: .25rem;
-}
-
-h2, #activityList {
-  color: black;
-}
-
-#first-row {
-  padding: 5% 5% 0 5%;
-}
-
-#second-row {
-  display: flex;
-  justify-content: space-around;
-}
-
-#primary-btn {
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
-  text-align: center;
-  vertical-align: middle;
-  padding: .375rem .75rem;
-  margin: 0 1rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: .25rem;
-}
-
-#primary-btn:hover {
-  color:#007bff;
-  background-color: #fff;
-  cursor: pointer;
-}
-
-#success-btn {
-  color: #fff;
-  background-color: #28a745;
-  border-color: #28a745;
-  text-align: center;
-  vertical-align: middle;
-  padding: .375rem .75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: .25rem;
-}
-
-#success-btn:hover {
-  color:#28a745;
-  background-color: #fff;
-  cursor: pointer;
-}
-
-#danger-btn {
-  color: #fff;
-  background-color: #dc3545;
-  border-color: #dc3545;
-  text-align: center;
-  vertical-align: middle;
-  padding: .375rem .75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: .25rem;
-}
-
-#danger-btn:hover {
-  color:#dc3545;
-  background-color: #fff;
-  cursor: pointer;
-}
-
-#fourth-row {
-  display: flex;
-  justify-content: center;
-  padding-bottom: 2em;
-}
-
-@media only screen and (max-width: 600px) {
-  .container {
-    max-width: 350px;
-  }
-
-  h1 {
-    margin-top: 2.5rem;
-    font-size: 2rem;
-  }
-} */
-
 html {
   font-size: 100%;
   box-sizing: border-box;
@@ -172,7 +56,7 @@ body {
 .left-button,
 .right-button {
   flex: 1;
-  min-height: 150px;
+  min-height: 140px;
   width: 300px;
   font-size: 24px;
   color: #fff;
@@ -211,7 +95,33 @@ body {
 .left-button:active, .right-button:active{
   top: 2px;
 }
-
+.button-Container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+a {
+  color:rgb(2, 206, 250);
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+}
+a:hover {
+  color:rgb(1, 108, 131);
+  filter: blur(1px);
+}
+a:visited:hover {
+  color:rgb(151, 129, 0);
+  filter: blur(1px);
+}
+a:visited {
+  color:rgb(255, 220, 19);
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+}
 
 @media only screen and (max-width: 768px) {
   .box {
