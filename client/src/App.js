@@ -18,22 +18,24 @@ function App() {
   const [isSlidOut, setIsSlidOut] = useState(false);
 
   useEffect(() => {
-    activityService
+    /* activityService
       .getAllActivities()
       .then(data => {
         setActivities(data.activities)
-      })
+      }) */
     activityService
       .getAnimalChoices()
       .then(data => {
         setAnimal1Name(data.name1)
+        console.log(data.name1)
         setAnimal2Name(data.name2)
+        console.log(data.name2)
       })
-    activityService
+    /* activityService
       .getNewActivity()
       .then(data => {
         setNewActivity(data.activity)
-      })
+      }) */
   }, [])
 
   const handleNewActivity = () => {
