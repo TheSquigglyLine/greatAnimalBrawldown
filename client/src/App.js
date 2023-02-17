@@ -77,20 +77,22 @@ function App() {
         return
     } else {}
 
-        clickedButton.style.backgroundColor = '#32a852';
+        clickedButton.style.backgroundColor = '#32a852'
 
         setTimeout(() => {
             setIsSlidOut(true)
-            handleAnimalChoice(choice)
+            handleAnimalChoice(event, choice)
         }, 1000);
   } 
 
-  const handleAnimalChoice = (choice) => {
+  const handleAnimalChoice = (event, choice) => {
+    const clickedButton = event.target;
     activityService
       .postAnimalChoice(animal1Name,animal2Name,choice)
       .then(data => {
         setAnimal1Name(data[0].name)
         setAnimal2Name(data[1].name)
+        clickedButton.style.backgroundColor = '#0086E0'
         setIsSlidOut(false)
       })
   }
