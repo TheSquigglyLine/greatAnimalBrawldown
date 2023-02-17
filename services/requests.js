@@ -19,8 +19,6 @@ const getEloRatings = (name1, name2) => {
 
 const updateEloRating = (animal1Elo, animal2Elo, animal1Win, K = 32) => {
   // Constants for Elo calculation
-  console.log(animal1Elo);
-  console.log(animal2Elo);
   const expectedScore = (rating1, rating2) => 1 / (1 + Math.pow(10, (rating2 - rating1) / 400)); 
   
   // Calculate actual scores based on game result
@@ -31,8 +29,6 @@ const updateEloRating = (animal1Elo, animal2Elo, animal1Win, K = 32) => {
   const player1NewElo = animal1Elo + K * (player1Score - expectedScore(animal1Elo, animal2Elo));
   const player2NewElo = animal2Elo + K * (player2Score - expectedScore(animal2Elo, animal1Elo));
 
-  console.log(player1NewElo);
-  console.log(player2NewElo);
   // Return updated Elo ratings
   return [Math.round(player1NewElo), Math.round(player2NewElo)];
 }
@@ -43,10 +39,7 @@ const getRandomElo = () => {
     .then(res => {
       const min = res.rows[0].min;
       const max = res.rows[0].max;
-      console.log(min);
-      console.log(max);
       const randomElo = Math.floor(Math.random() * (max - min +1) + min);
-      console.log(randomElo);
       return randomElo;
     })
     .catch(err => console.error(err));
@@ -54,20 +47,16 @@ const getRandomElo = () => {
 
 const processAnimalChoice = (req, res) => {
   const { animal1, animal2, choice } = req.body;
-  console.log(req.body);
   const animal1Str = String(animal1);
   const animal2Str = String(animal2);
   const choiceStr = String(choice);
   
   const animal1win = (choiceStr === animal1Str) ? 1 : 0;
 
-  console.log(animal1win);
   getEloRatings(animal1Str, animal2Str)
     .then(ratings => {
-      console.log(ratings);
       const newRatings = updateEloRating(ratings[0].elo, ratings[1].elo, animal1win)
         
-      console.log(newRatings);
 
       const update1Query = `UPDATE animals SET elo = $1 WHERE name = $2`
       const update2Query = `UPDATE animals SET elo = $1 WHERE name = $2`
@@ -93,7 +82,6 @@ const processAnimalChoice = (req, res) => {
 
     getRandomElo()
     .then(elo => {
-      console.log(elo)
       const getNewAnimalsQuery = `SELECT name, wikilink FROM animals ORDER BY ABS(elo - $1) LIMIT 2`
       pool.query(getNewAnimalsQuery,[elo])
         .then(result => res.json(result.rows)) 
@@ -105,7 +93,6 @@ const processAnimalChoice = (req, res) => {
 const getNewAnimals = (req, res) => {
   getRandomElo()
     .then(elo => {
-      console.log(elo)
       const getNewAnimalsQuery = `SELECT name, wikilink FROM animals ORDER BY ABS(elo - $1) LIMIT 2`
       pool.query(getNewAnimalsQuery,[elo])
         .then(result => res.json(result.rows)) 
