@@ -9,7 +9,7 @@ const pool = new Pool({ // create connection to database
 });
 
 const getEloRatings = (name1, name2) => {
-  const eloString = `SELECT elo FROM animals WHERE name IN ($1, $2)`;
+  const eloString = `SELECT elo FROM animals WHERE name IN ($1, $2) ORDER BY CASE name WHEN $1 THEN 1 WHEN $2 THEN 2 END`;
   const values = [name1, name2];
   return pool.query(eloString, values)
     .then(result => result.rows)
