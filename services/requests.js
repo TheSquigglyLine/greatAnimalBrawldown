@@ -62,8 +62,8 @@ const processAnimalChoice = (req, res) => {
       console.log(animal2Str + " rating change: " + ratings[1].elo + " -> " + newRatings[1]);
  
 
-      const update1Query = `UPDATE animals SET elo = $1, ratings = ratings + 1 WHERE name = $2`
-      const update2Query = `UPDATE animals SET elo = $1, ratings = ratings + 1 WHERE name = $2`
+      const update1Query = `UPDATE animals SET elo = $1 WHERE name = $2`
+      const update2Query = `UPDATE animals SET elo = $1 WHERE name = $2`
 
       const insertVoteQuery = 'INSERT INTO ratings (animal_1_name, animal_2_name, animal_1_elo, animal_2_elo, animal_1_win, animal_1_old_elo, animal_2_old_elo) VALUES ($1, $2, $3, $4, $5, $6, $7)'
       const values = [animal1Str, animal2Str, newRatings[0], newRatings[1], animal1win, ratings[0].elo, ratings[1].elo]
