@@ -13,7 +13,6 @@ function App() {
     activityService
       .getAnimalChoices()
       .then(data => {
-        console.log(data)
         setAnimal1Name(data.animal1.name)
         setAnimal1wiki(data.animal1.wikilink)
         setAnimal2Name(data.animal2.name)
@@ -40,7 +39,6 @@ function App() {
     activityService
       .postAnimalChoice(animal1Name,animal2Name,choice)
       .then(data => {
-        console.log(data)
         setAnimal1Name(data.animal1.name)
         setAnimal1wiki(data.animal1.wikilink)
         setAnimal2Name(data.animal2.name)

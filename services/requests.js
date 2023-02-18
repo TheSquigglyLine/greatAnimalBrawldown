@@ -91,52 +91,15 @@ const processAnimalChoice = (req, res) => {
       .catch(err => console.log(err)); */
 
     getRandomElo()
-      .then(elo => {
-        const getNewAnimalsQuery = `SELECT name, wikilink, ratings FROM animals ORDER BY ABS(elo - $1) LIMIT 15`
-        pool.query(getNewAnimalsQuery,[elo])
-          .then(result => {
-            console.log(result);
-            const rows = result.rows;
-            rows.sort((a,b) => a.ratings - b.ratings);
-            const lowestRatings = rows.slice(0,2);
-
-            const animal1 = lowestRatings[0];
-            const animal2 = lowestRatings[1];
-    
-            const response = {
-                animal1: {
-                  name: animal1.name,
-                  wikilink: animal1.wikilink
-                },
-                animal2: {
-                  name: animal2.name,
-                  wikilink: animal2.wikilink
-                }
-              };
-
-            res.json(response);
-          }) 
-          .catch(err => console.log(err));
-      })
-      .catch(err => console.log(err));
-}
-const getNewAnimals = (req, res) => {
-  getRandomElo()
     .then(elo => {
       const getNewAnimalsQuery = `SELECT name, wikilink, ratings FROM animals ORDER BY ABS(elo - $1) LIMIT 15`;
       pool.query(getNewAnimalsQuery,[elo])
         .then(result => {
-          console.log(result);
           const rows = result.rows;
-          console.log(rows);
           rows.sort((a,b) => a.ratings - b.ratings);
-          console.log(rows);
           const lowestRatings = rows.slice(0,2);
-          console.log(lowestRatings);
           const animal1 = lowestRatings[0];
           const animal2 = lowestRatings[1];
-          console.log(animal1);
-          console.log(animal2);
   
           const response = {
               animal1: {
@@ -148,7 +111,35 @@ const getNewAnimals = (req, res) => {
                 wikilink: animal2.wikilink
               }
             };
-            console.log(response);
+
+          res.json(response);
+        }) 
+        .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
+}
+const getNewAnimals = (req, res) => {
+  getRandomElo()
+    .then(elo => {
+      const getNewAnimalsQuery = `SELECT name, wikilink, ratings FROM animals ORDER BY ABS(elo - $1) LIMIT 15`;
+      pool.query(getNewAnimalsQuery,[elo])
+        .then(result => {
+          const rows = result.rows;
+          rows.sort((a,b) => a.ratings - b.ratings);
+          const lowestRatings = rows.slice(0,2);
+          const animal1 = lowestRatings[0];
+          const animal2 = lowestRatings[1];
+  
+          const response = {
+              animal1: {
+                name: animal1.name,
+                wikilink: animal1.wikilink
+              },
+              animal2: {
+                name: animal2.name,
+                wikilink: animal2.wikilink
+              }
+            };
 
           res.json(response);
         }) 
