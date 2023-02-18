@@ -14,10 +14,10 @@ function App() {
       .getAnimalChoices()
       .then(data => {
         console.log(data)
-        setAnimal1Name(data[0].name)
-        setAnimal1wiki(data[0].wikilink)
-        setAnimal2Name(data[1].name)
-        setAnimal2wiki(data[1].wikilink)
+        setAnimal1Name(data.animal1.name)
+        setAnimal1wiki(data.animal1.wikilink)
+        setAnimal2Name(data.animal2.name)
+        setAnimal2wiki(data.animal2.wikilink)
       }) 
   }, [])
 
@@ -41,10 +41,10 @@ function App() {
       .postAnimalChoice(animal1Name,animal2Name,choice)
       .then(data => {
         console.log(data)
-        setAnimal1Name(data[0].name)
-        setAnimal1wiki(data[0].wikilink)
-        setAnimal2Name(data[1].name)
-        setAnimal2wiki(data[1].wikilink)
+        setAnimal1Name(data.animal1.name)
+        setAnimal1wiki(data.animal1.wikilink)
+        setAnimal2Name(data.animal2.name)
+        setAnimal2wiki(data.animal2.wikilink)
         clickedButton.style.backgroundColor = '#0086E0'
         setIsSlidOut(false)
       })
