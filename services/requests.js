@@ -95,8 +95,8 @@ const processAnimalChoice = (req, res) => {
       const getNewAnimalsQuery = `SELECT name, wikilink, ratings FROM animals ORDER BY ABS(elo - $1) LIMIT 15`
       pool.query(getNewAnimalsQuery,[elo])
         .then(result => {
+          console.log(result);
           const rows = result.rows;
-          console.log(rows);
           rows.sort((a,b) => a.ratings - b.ratings);
           const lowestRatings = rows.slice(0,2);
 
