@@ -19,7 +19,7 @@ const getEloRatings = (name1, name2) => {
 
 const updateEloRating = (animal1Elo, animal2Elo, animal1Win, K = 32) => {
   // Constants for Elo calculation
-  const expectedScore = (rating1, rating2) => 1 / (1 + Math.pow(10, (rating2 - rating1) / 400)); 
+  const expectedScore = (rating1, rating2) => 1 / (1 + Math.pow(10, (rating1 - rating2) / 400)); 
   
   // Calculate actual scores based on game result
   const player1Score = animal1Win ? 1 : 0;
