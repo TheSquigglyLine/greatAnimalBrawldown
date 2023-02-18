@@ -13,6 +13,7 @@ function App() {
     activityService
       .getAnimalChoices()
       .then(data => {
+        console.log(data)
         setAnimal1Name(data[0].name)
         setAnimal1wiki(data[0].wikilink)
         setAnimal2Name(data[1].name)
