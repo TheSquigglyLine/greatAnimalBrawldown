@@ -3,8 +3,8 @@ import React from 'react'
 const Animals = ({ animateButtonClick , name1 , name2 , isSlidOut , wikilink1, wikilink2}) => {
   return (
     <div className="box">
-        <div className="button-Container">
-          <button id="Left-Button" className={`left-button ${isSlidOut ? 'slide-out' : ''}`} onClick={(event) => { animateButtonClick(event, name1); }}>{ name1 || "Click To Start" }</button>
+        <div className={`button-Container-left ${isSlidOut ? 'slide-out' : ''}`}>
+          <button id="Left-Button" className='left-button' onClick={(event) => { animateButtonClick(event, name1); }}>{ name1 || "Click To Start" }</button>
           <a href = {wikilink1} style={{ marginTop: '12px' }} target="_blank" rel="noreferrer">Wikipedia Link</a>
         </div>
         <img
@@ -14,8 +14,8 @@ const Animals = ({ animateButtonClick , name1 , name2 , isSlidOut , wikilink1, w
             style={{ width: 50, height: 50 }}
             alt="Crossed Swords Battle"
             />
-        <div className="button-Container">
-          <button id="Right-Button" className={`right-button ${isSlidOut ? 'slide-out' : ''}`} onClick={(event) => { animateButtonClick(event, name2); }}>{ name2 || "Click To Start" }</button>
+        <div className={`button-Container-right ${isSlidOut ? 'slide-out' : ''}`}>
+          <button id="Right-Button" className='right-button' onClick={(event) => { animateButtonClick(event, name2); }}>{ name2 || "Click To Start" }</button>
           <a href = {wikilink2} style={{ marginTop: '12px' }} target="_blank" rel="noreferrer">Wikipedia Link</a>
         </div>
     </div>

@@ -95,10 +95,17 @@ body {
 .left-button:active, .right-button:active{
   top: 2px;
 }
-.button-Container {
+.button-Container-left,
+.button-Container-right {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.button-Container-left.slide-out {
+  transform: translateX(-1000%);
+}
+.button-Container-right.slide-out {
+  transform: translateX(1000%);
 }
 a {
   color:rgb(2, 206, 250);
