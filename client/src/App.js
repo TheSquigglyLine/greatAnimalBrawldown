@@ -39,6 +39,7 @@ function App() {
     activityService
       .postAnimalChoice(animal1Name,animal2Name,choice)
       .then(data => {
+        console.log(data)
         setAnimal1Name(data[0].name)
         setAnimal1wiki(data[0].wikilink)
         setAnimal2Name(data[1].name)
