@@ -55,8 +55,11 @@ const processAnimalChoice = (req, res) => {
 
   getEloRatings(animal1Str, animal2Str)
     .then(ratings => {
+      console.log(ratings[0].elo)
+      console.log(ratings[1].elo)
       const newRatings = updateEloRating(ratings[0].elo, ratings[1].elo, animal1win)
-        
+      console.log(newRatings[0])
+      console.log(newRatings[1])  
 
       const update1Query = `UPDATE animals SET elo = $1 WHERE name = $2`
       const update2Query = `UPDATE animals SET elo = $1 WHERE name = $2`
