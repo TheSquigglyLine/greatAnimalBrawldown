@@ -26,8 +26,8 @@ const updateEloRating = (animal1Elo, animal2Elo, animal1Win, K = 32) => {
   const player2Score = animal1Win ? 0 : 1;
 
   // Calculate new Elo ratings based on game result
-  const player1NewElo = animal1Elo + K * (player1Score - expectedScore(animal1Elo, animal2Elo));
-  const player2NewElo = animal2Elo + K * (player2Score - expectedScore(animal2Elo, animal1Elo));
+  const player1NewElo = animal1Elo + K * (player1Score - expectedScore(animal2Elo, animal1Elo));
+  const player2NewElo = animal2Elo + K * (player2Score - expectedScore(animal1Elo, animal2Elo));
 
   // Return updated Elo ratings
   return [Math.round(player1NewElo), Math.round(player2NewElo)];
