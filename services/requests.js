@@ -40,6 +40,7 @@ const getRandomElo = () => {
       const min = res.rows[0].min;
       const max = res.rows[0].max;
       const randomElo = Math.floor(Math.random() * (max - min +1) + min);
+      console.log(randomElo);
       return randomElo;
     })
     .catch(err => console.error(err));
@@ -95,6 +96,7 @@ const processAnimalChoice = (req, res) => {
       pool.query(getNewAnimalsQuery,[elo])
         .then(result => {
           const rows = result.rows;
+          console.log(rows);
           rows.sort((a,b) => a.ratings - b.ratings);
           const lowestRatings = rows.slice(0,2);
 
