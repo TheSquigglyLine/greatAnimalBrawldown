@@ -55,7 +55,7 @@ const processAnimalChoice = (req, res) => {
 
   getEloRatings(animal1Str, animal2Str)
     .then(ratings => {
-      
+
       const newRatings = updateEloRating(ratings[0].elo, ratings[1].elo, animal1win);
 
       console.log(animal1Str + " rating change: " + ratings[0].elo + " -> " + newRatings[0]);
@@ -68,18 +68,18 @@ const processAnimalChoice = (req, res) => {
       const insertVoteQuery = 'INSERT INTO ratings (animal_1_name, animal_2_name, animal_1_elo, animal_2_elo, animal_1_win) VALUES ($1, $2, $3, $4, $5)'
       const values = [animal1Str, animal2Str, newRatings[0], newRatings[1], animal1win]
       pool.query(insertVoteQuery, values)
-        .then(result => console.log(result))
+        .then(result => {})
         .catch(err => console.log(err))
 
       const value1 = [newRatings[0], animal1Str]
       const value2 = [newRatings[1], animal2Str]
 
       pool.query(update1Query, value1)
-        .then(result => console.log(result))
+        .then(result => {})
         .catch(err => console.log(err))
 
       pool.query(update2Query, value2)
-        .then(result => console.log(result))
+        .then(result => {})
         .catch(err => console.log(err))
     })
     .catch(error => console.log(error));
