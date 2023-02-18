@@ -84,35 +84,69 @@ const processAnimalChoice = (req, res) => {
     })
     .catch(error => console.log(error));
 
-    const randomquery = `SELECT name, wikilink FROM animals ORDER BY random() LIMIT 2`;
+    /* const randomquery = `SELECT name, wikilink FROM animals ORDER BY random() LIMIT 2`;
     pool.query(randomquery)
       .then(result => res.json(result.rows)) 
-      .catch(err => console.log(err));
+      .catch(err => console.log(err)); */
 
-    /* getRandomElo()
+    getRandomElo()
     .then(elo => {
-      const getNewAnimalsQuery = `SELECT name, wikilink FROM animals ORDER BY ABS(elo - $1) LIMIT 2`
+      const getNewAnimalsQuery = `SELECT name, wikilink, ratings FROM animals ORDER BY ABS(elo - $1) LIMIT 15`
       pool.query(getNewAnimalsQuery,[elo])
-        .then(result => res.json(result.rows)) 
+        .then(result => {
+          const rows = result.rows;
+          rows.sort((a,b) => a.ratings - b.ratings);
+          const lowestRatings = rows.slice(0,2);
+
+          const animal1 = lowestRatings[0];
+          const animal2 = lowestRatings[1];
+  
+          const response = {
+              animal1: {
+                name: animal1.name,
+                wikilink: animal1.wikilink
+              },
+              animal2: {
+                name: animal2.name,
+                wikilink: animal2.wikilink
+              }
+            };
+
+          res.json(response);
+        }) 
         .catch(err => console.log(err));
     })
-    .catch(err => console.log(err)); */
-}
-
-const getNewAnimals = (req, res) => {
-  const randomquery = `SELECT name, wikilink FROM animals ORDER BY random() LIMIT 2`;
-  pool.query(randomquery)
-    .then(result => res.json(result.rows)) 
     .catch(err => console.log(err));
-
-  /* getRandomElo()
+}
+const getNewAnimals = (req, res) => {
+  getRandomElo()
     .then(elo => {
-      const getNewAnimalsQuery = `SELECT name, wikilink FROM animals ORDER BY ABS(elo - $1) LIMIT 2`
+      const getNewAnimalsQuery = `SELECT name, wikilink, ratings FROM animals ORDER BY ABS(elo - $1) LIMIT 15`
       pool.query(getNewAnimalsQuery,[elo])
-        .then(result => res.json(result.rows)) 
+        .then(result => {
+          const rows = result.rows;
+          rows.sort((a,b) => a.ratings - b.ratings);
+          const lowestRatings = rows.slice(0,2);
+
+          const animal1 = lowestRatings[0];
+          const animal2 = lowestRatings[1];
+  
+          const response = {
+              animal1: {
+                name: animal1.name,
+                wikilink: animal1.wikilink
+              },
+              animal2: {
+                name: animal2.name,
+                wikilink: animal2.wikilink
+              }
+            };
+
+          res.json(response);
+        }) 
         .catch(err => console.log(err));
     })
-    .catch(err => console.log(err)); */
+    .catch(err => console.log(err));
     
 }
 
