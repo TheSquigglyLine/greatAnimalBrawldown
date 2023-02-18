@@ -123,16 +123,20 @@ const processAnimalChoice = (req, res) => {
 const getNewAnimals = (req, res) => {
   getRandomElo()
     .then(elo => {
-      const getNewAnimalsQuery = `SELECT name, wikilink, ratings FROM animals ORDER BY ABS(elo - $1) LIMIT 15`
+      const getNewAnimalsQuery = `SELECT name, wikilink, ratings FROM animals ORDER BY ABS(elo - $1) LIMIT 15`;
       pool.query(getNewAnimalsQuery,[elo])
         .then(result => {
           console.log(result);
           const rows = result.rows;
+          console.log(rows);
           rows.sort((a,b) => a.ratings - b.ratings);
+          console.log(rows);
           const lowestRatings = rows.slice(0,2);
-
+          console.log(lowestRatings);
           const animal1 = lowestRatings[0];
           const animal2 = lowestRatings[1];
+          console.log(animal1);
+          console.log(animal2);
   
           const response = {
               animal1: {
@@ -144,6 +148,7 @@ const getNewAnimals = (req, res) => {
                 wikilink: animal2.wikilink
               }
             };
+            console.log(response);
 
           res.json(response);
         }) 
