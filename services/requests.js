@@ -93,8 +93,16 @@ const processAnimalChoice = (req, res) => {
     getRandomElo()
     .then(elo => {
       console.log(elo);
-      const getNewAnimalsQuery = `SELECT name, wikilink, ratings FROM animals ORDER BY ABS(elo - $1) LIMIT 50`;
-      pool.query(getNewAnimalsQuery,[elo])
+      const getNewAnimalsQuery = `SELECT *
+      FROM (
+        SELECT name, wikilink, ratings
+        FROM animals
+        ORDER BY ABS(elo - $1)
+        LIMIT 50
+      ) subquery
+      WHERE subquery.name NOT IN ('$2', '$3')`;
+      const data = [elo,animal1Str,animal2Str]
+      pool.query(getNewAnimalsQuery,data)
         .then(result => {
           console.log(result);
           const rows = result.rows;
