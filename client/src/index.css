@@ -13,10 +13,6 @@ body {
 #app {
   height: 100%;
 }
-main .wikilink {
-  color: #4e4a46;
-  text-decoration: none;
-}
 main {
   color: rgb(252, 250, 225);
   height: 100%;
