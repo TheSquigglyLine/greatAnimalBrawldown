@@ -13,54 +13,77 @@ body {
 #app {
   height: 100%;
 }
-main a {
+main .wikilink {
   color: #4e4a46;
   text-decoration: none;
 }
-main a:hover,
-main a:focus {
-  color: #c94e50;
-}
 main {
-  color: #fcfae1;
+  color: rgb(252, 250, 225);
   height: 100%;
-  padding: 3em 2em;
+  padding: 1.5em 1em;
   text-align: center;
-  overflow: auto;
 }
-.voter{
+.container {
+  max-width: 800px;
+  margin: 2em auto 3em;
+  padding: 0 1em;
+  align-items: center;
+}
+.voter {
   max-width: 1200px;
   margin: 2em auto 3em;
   padding: 0 1em;
+  align-items: center;
+  display: table;
 }
-*, *::before, *::after {
+.voter > div {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
-.left-button, .right-button {
-  flex: 1;
+.left-button,
+.right-button {
+  display: block;
   min-height: 140px;
   width: 300px;
   font-size: 24px;
   color: #fff;
-  padding: 10px 10px;
+  padding: 15px 15px;
+  margin-bottom: 8px;
   font-weight: bold;
   cursor: pointer;
   border-radius: 5px;
   border: none;
-  box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5), 7px 7px 20px 0px rgba(47, 116, 245, 0.479), 4px 4px 5px 0px rgba(69, 94, 141, 0.699);
-  background: #0086E0;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(47, 116, 245, 0.479),
+    4px 4px 5px 0px rgba(69, 94, 141, 0.699);
+  background: #0086e0;
 }
-.left-button:hover, .right-button:hover {
+.fight-symbol {
+  align-items: center;
+  display: inline-block;
+  text-align: center;
+}
+.left-button:hover,
+.right-button:hover {
   background-color: #2075ff;
 }
-.left-button:active, .right-button:active{
+.left-button:active,
+.right-button:active {
   top: 2px;
 }
-.button-Container-left, .button-Container-right {
+.button-Container-left,
+.button-Container-right {
   transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
   align-items: center;
+  display: inline-block;
+  text-align: center;
+  padding: 10px 10px;
 }
 .button-Container-left.slide-out {
   transform: translateX(-1000%);
@@ -68,40 +91,43 @@ main {
 .button-Container-right.slide-out {
   transform: translateX(1000%);
 }
-a {
-  color:rgb(2, 206, 250);
+.wikilink {
+  color: rgb(2, 206, 250);
   text-decoration: none;
   font-family: Arial, sans-serif;
   font-size: 18px;
   font-weight: bold;
 }
-a:hover {
-  color:rgb(1, 108, 131);
+.wikilink:hover {
+  color: rgb(1, 108, 131);
   filter: blur(1px);
 }
-a:visited:hover {
-  color:rgb(151, 129, 0);
+.wikilink:visited:hover {
+  color: rgb(151, 129, 0);
   filter: blur(1px);
 }
-a:visited {
-  color:rgb(255, 220, 19);
+.wikilink:visited {
+  color: rgb(255, 220, 19);
   text-decoration: none;
   font-family: Arial, sans-serif;
   font-size: 18px;
+  font-weight: bold;
+}
+p {
+  padding: 5px;
   font-weight: bold;
 }
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: fixed;
-  width: 36px;
-  height: 30px;
-  left: 36px;
-  top: 36px;
+  width: 40px;
+  height: 25px;
+  left: 20px;
+  top: 20px;
 }
-
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: #0086E0;
+  background: rgb(2, 206, 250);
 }
 
 /* Color/shape of burger icon bars on hover*/
@@ -111,13 +137,13 @@ a:visited {
 
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
-  height: 24px;
-  width: 24px;
+  height: 30px;
+  width: 30px;
 }
 
 /* Color/shape of close button cross */
 .bm-cross {
-  background: #0086E0;
+  background: rgb(2, 206, 250);;
 }
 
 /*
@@ -132,7 +158,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* General sidebar styles */
 .bm-menu {
   background: #3d3d3d;
-  padding: 2.5em 1.5em 0;
+  padding: 10px 0 0 20px;
   font-size: 1.15em;
 }
 
@@ -144,12 +170,51 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* Wrapper for item list */
 .bm-item-list {
   color: #b8b7ad;
-  padding: 0.8em;
+  padding: 5px;
 }
 
 /* Individual item */
 .bm-item {
   display: inline-block;
+  padding: 15px 0 0 0;
+  color: rgb(252, 250, 225);
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+}
+.leaderbaord-bar{
+  position: relative;
+  max-width: 800px;
+  height: 50px;
+  border-radius: 5px; 
+  background-color: #3d3d3d;
+  /* box-shadow: 0px 0px 10px 1px rgba(19, 200, 200, 1); */
+  margin: 15px;
+  text-align: center;
+  vertical-align: left;
+}
+.leaderbaord-bar div{
+  position:absolute;
+  top: 0;
+  left:0;
+}
+.leaderbaord-bar span{
+  position:absolute;
+  top: 0;
+  left:0;
+}
+.leaderbaord-bar-fill {
+  margin-left: 10;
+  border-radius: 5px; 
+  background: rgb(2, 206, 250);
+  transition: all 2s ease;
+  
+}
+.leaderboard-bar-text{
+  color: rgb(252, 250, 225);
+  font-size: 20px;
+  font-weight: bold;
+  margin: 12px; 
 }
 
 /* Styling of overlay */
@@ -157,12 +222,16 @@ Note: Beware of modifying this element as it can break the animations - you shou
   background: rgba(0, 0, 0, 0.3);
 }
 
-
+span {
+  margin-left: 0.5em;
+}
 @media only screen and (max-width: 768px) {
-  .box {
-      flex-direction: column;
- }
+  .voter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   button {
-      max-width: 100%;
- }
+    max-width: 100%;
+  }
 }

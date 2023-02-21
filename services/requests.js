@@ -19,8 +19,8 @@ const getEloRatings = (name1, name2) => {
 
 const updateEloRating = (animal1Elo, animal2Elo, animal1Win, K = 32) => {
   // Constants for Elo calculation
-  const expectedScore = (rating1, rating2) => 1 / (1 + Math.pow(10, (rating1 - rating2) / 400)); 
-  
+  const expectedScore = (rating1, rating2) => 1 / (1 + Math.pow(10, (rating1 - rating2) / 400));
+
   // Calculate actual scores based on game result
   const player1Score = animal1Win ? 1 : 0;
   const player2Score = animal1Win ? 0 : 1;
@@ -39,7 +39,7 @@ const getRandomElo = () => {
     .then(res => {
       const min = res.rows[0].min;
       const max = res.rows[0].max;
-      const randomElo = Math.floor(Math.random() * (max - min +1) + min);
+      const randomElo = Math.floor(Math.random() * (max - min + 1) + min);
       console.log(randomElo);
       return randomElo;
     })
@@ -51,7 +51,7 @@ const processAnimalChoice = (req, res) => {
   const animal1Str = String(animal1);
   const animal2Str = String(animal2);
   const choiceStr = String(choice);
-  
+
   const animal1win = (choiceStr === animal1Str) ? 1 : 0;
 
   getEloRatings(animal1Str, animal2Str)
@@ -61,7 +61,7 @@ const processAnimalChoice = (req, res) => {
 
       console.log(animal1Str + " rating change: " + ratings[0].elo + " -> " + newRatings[0]);
       console.log(animal2Str + " rating change: " + ratings[1].elo + " -> " + newRatings[1]);
- 
+
 
       const update1Query = `UPDATE animals SET elo = $1 WHERE name = $2`
       const update2Query = `UPDATE animals SET elo = $1 WHERE name = $2`
@@ -69,7 +69,7 @@ const processAnimalChoice = (req, res) => {
       const insertVoteQuery = 'INSERT INTO ratings (animal_1_name, animal_2_name, animal_1_elo, animal_2_elo, animal_1_win, animal_1_old_elo, animal_2_old_elo) VALUES ($1, $2, $3, $4, $5, $6, $7)'
       const values = [animal1Str, animal2Str, newRatings[0], newRatings[1], animal1win, ratings[0].elo, ratings[1].elo]
       pool.query(insertVoteQuery, values)
-        .then(result => {})
+        .then(result => { })
         .catch(err => console.log(err))
 
       const value1 = [newRatings[0], animal1Str]
@@ -85,39 +85,39 @@ const processAnimalChoice = (req, res) => {
     })
     .catch(error => console.log(error));
 
-    /* const randomquery = `SELECT name, wikilink FROM animals ORDER BY random() LIMIT 2`;
-    pool.query(randomquery)
-      .then(result => res.json(result.rows)) 
-      .catch(err => console.log(err)); */
+  /* const randomquery = `SELECT name, wikilink FROM animals ORDER BY random() LIMIT 2`;
+  pool.query(randomquery)
+    .then(result => res.json(result.rows)) 
+    .catch(err => console.log(err)); */
 
-    getRandomElo()
+  getRandomElo()
     .then(elo => {
       console.log(elo);
       const getNewAnimalsQuery = "SELECT * FROM (SELECT name, wikilink, ratings FROM animals ORDER BY ABS(elo - $1) LIMIT 50) subquery WHERE subquery.name NOT IN ($2, $3)";
-      const data = [elo,animal1Str,animal2Str]
-      pool.query(getNewAnimalsQuery,data)
+      const data = [elo, animal1Str, animal2Str]
+      pool.query(getNewAnimalsQuery, data)
         .then(result => {
           console.log(result);
           const rows = result.rows;
-          rows.sort((a,b) => a.ratings - b.ratings);
+          rows.sort((a, b) => a.ratings - b.ratings);
           console.log(rows);
-          const lowestRatings = rows.slice(0,2);
+          const lowestRatings = rows.slice(0, 2);
           const animal1 = lowestRatings[0];
           const animal2 = lowestRatings[1];
           console.log(lowestRatings);
           const response = {
-              animal1: {
-                name: animal1.name,
-                wikilink: animal1.wikilink
-              },
-              animal2: {
-                name: animal2.name,
-                wikilink: animal2.wikilink
-              }
-            };
+            animal1: {
+              name: animal1.name,
+              wikilink: animal1.wikilink
+            },
+            animal2: {
+              name: animal2.name,
+              wikilink: animal2.wikilink
+            }
+          };
 
           res.json(response);
-        }) 
+        })
         .catch(err => console.log(err));
     })
     .catch(err => console.log(err));
@@ -127,33 +127,41 @@ const getNewAnimals = (req, res) => {
     .then(elo => {
       console.log(elo);
       const getNewAnimalsQuery = `SELECT name, wikilink, ratings FROM animals ORDER BY ABS(elo - $1) LIMIT 50`;
-      pool.query(getNewAnimalsQuery,[elo])
+      pool.query(getNewAnimalsQuery, [elo])
         .then(result => {
           console.log(result);
           const rows = result.rows;
-          rows.sort((a,b) => a.ratings - b.ratings);
+          rows.sort((a, b) => a.ratings - b.ratings);
           console.log(rows);
-          const lowestRatings = rows.slice(0,2);
+          const lowestRatings = rows.slice(0, 2);
           const animal1 = lowestRatings[0];
           const animal2 = lowestRatings[1];
           console.log(lowestRatings);
           const response = {
-              animal1: {
-                name: animal1.name,
-                wikilink: animal1.wikilink
-              },
-              animal2: {
-                name: animal2.name,
-                wikilink: animal2.wikilink
-              }
-            };
+            animal1: {
+              name: animal1.name,
+              wikilink: animal1.wikilink
+            },
+            animal2: {
+              name: animal2.name,
+              wikilink: animal2.wikilink
+            }
+          };
 
           res.json(response);
-        }) 
+        })
         .catch(err => console.log(err));
     })
     .catch(err => console.log(err));
-    
+
+}
+const getAllAnimals = (req, res) => {
+  const getAllAnimalsQuer = 'SELECT id, name, elo, ROUND(((elo - (SELECT MIN(elo) FROM animals))::numeric / ((SELECT MAX(elo) FROM animals) - (SELECT MIN(elo) FROM animals))::numeric * 100)) AS elo_percentage, wikilink, ratings FROM animals ORDER BY elo DESC'
+  pool.query(getNewAnimalsQuery)
+    .then(results => {
+      res.json(results.rows);
+    })
+    .catch(err => console.log(err));
 }
 
 

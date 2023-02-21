@@ -14,14 +14,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-app.get('/api/activities', (req, res) => { // route root directory ('/' is this file (app.js))
+app.get('/api/animals', (req, res) => { // route root directory ('/' is this file (app.js))
   services.getNewAnimals(req, res);
 });
-app.post('/api/activities/animal-choice', (req, res) => {
+app.post('/api/animals/animal-choice', (req, res) => {
   services.processAnimalChoice(req, res);
 });
-app.get('/api/activities/new-animals', (req, res) => {
+app.get('/api/animals/new-animals', (req, res) => {
   services.getNewAnimals(req, res);
+});
+app.get('/api/animals/all-animals', (req, res) => {
+  services.getAllAnimals(req, res);
 });
 
 app.listen(PORT, () => { // start server and listen on specified port

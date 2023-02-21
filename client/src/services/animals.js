@@ -4,7 +4,7 @@ axios.defaults.headers.common = {
   "Content-Type": "application/json"
 }
 
-const baseUrl = 'api/activities' 
+const baseUrl = 'api/animals' 
 
 const postAnimalChoice = (animal1, animal2, choice) => {
   const data = { animal1: animal1, animal2: animal2, choice: choice }
@@ -18,5 +18,9 @@ const getAnimalChoices = () => {
   const request = axios.get(`${baseUrl}/new-animals`)
   return request.then(response => response.data)
 }
+const getAllAnimals = () => {
+  const request = axios.get(`${baseUrl}/all-animals`)
+  return request.then(response => response.data)
+}
 
-export default { postAnimalChoice, getAnimalChoices }
+export default { postAnimalChoice, getAnimalChoices, getAllAnimals }
