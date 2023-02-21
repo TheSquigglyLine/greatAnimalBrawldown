@@ -44,6 +44,7 @@ const Leaderboards = () => {
         animalService
             .getAllAnimals()
             .then(data => {
+                console.log(data);
                 if (Array.isArray(data)) {
                     setAnimals(data);
                 }

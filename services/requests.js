@@ -160,9 +160,10 @@ const getAllAnimals = (req, res) => {
   pool.query(getNewAnimalsQuery)
     .then(results => {
       res.json(results.rows);
+      console.log(res)
     })
     .catch(err => console.log(err));
 }
 
 
-module.exports = { processAnimalChoice, getNewAnimals }
+module.exports = { processAnimalChoice, getNewAnimals, getAllAnimals }
