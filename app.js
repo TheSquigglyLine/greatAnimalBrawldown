@@ -1,5 +1,6 @@
 const express = require('express'); // import express module (simplifies routing/requests, among other things)
 const cors = require('cors'); // import the CORS library to allow Cross-origin resource sharing
+const path = require('path');
 const app = express(); // create an instance of the express module (app is the conventional variable name used)
 var bodyParser = require('body-parser');
 
@@ -13,8 +14,8 @@ app.use(express.static('build')); // serve static files (css & js) from the 'pub
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/api/animals/*', function(req, res) {
-  res.sendFile(path.join(__dirname, './build/index.html'), function(err) {
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'index.html'), function(err) {
     if (err) {
       res.status(500).send(err)
     }
