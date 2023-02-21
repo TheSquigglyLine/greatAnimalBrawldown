@@ -10,17 +10,13 @@ const PORT = process.env.PORT || 5000; // use either the host env var port (PORT
 
 app.use(cors()); // Enable CORS 
 app.use(express.json()); // Recognize Request Objects as JSON objects
-app.use(express.static('build')); // serve static files (css & js) from the 'public' directory
+app.use(express.static(path.join(__dirname, 'client/build'))); // serve static files (css & js) from the 'public' directory
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'index.html'), function(err) {
-    if (err) {
-      res.status(500).send(err)
-    }
-  })
-})
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
 app.get('/api/animals', (req, res) => { // route root directory ('/' is this file (app.js))
   services.getNewAnimals(req, res);
 });
