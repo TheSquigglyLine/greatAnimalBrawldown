@@ -92,19 +92,15 @@ const processAnimalChoice = (req, res) => {
 
   getRandomElo()
     .then(elo => {
-      console.log(elo);
       const getNewAnimalsQuery = "SELECT * FROM (SELECT name, wikilink, ratings FROM animals ORDER BY ABS(elo - $1) LIMIT 50) subquery WHERE subquery.name NOT IN ($2, $3)";
       const data = [elo, animal1Str, animal2Str]
       pool.query(getNewAnimalsQuery, data)
         .then(result => {
-          console.log(result);
           const rows = result.rows;
           rows.sort((a, b) => a.ratings - b.ratings);
-          console.log(rows);
           const lowestRatings = rows.slice(0, 2);
           const animal1 = lowestRatings[0];
           const animal2 = lowestRatings[1];
-          console.log(lowestRatings);
           const response = {
             animal1: {
               name: animal1.name,
@@ -125,18 +121,14 @@ const processAnimalChoice = (req, res) => {
 const getNewAnimals = (req, res) => {
   getRandomElo()
     .then(elo => {
-      console.log(elo);
       const getNewAnimalsQuery = `SELECT name, wikilink, ratings FROM animals ORDER BY ABS(elo - $1) LIMIT 50`;
       pool.query(getNewAnimalsQuery, [elo])
         .then(result => {
-          console.log(result);
           const rows = result.rows;
           rows.sort((a, b) => a.ratings - b.ratings);
-          console.log(rows);
           const lowestRatings = rows.slice(0, 2);
           const animal1 = lowestRatings[0];
           const animal2 = lowestRatings[1];
-          console.log(lowestRatings);
           const response = {
             animal1: {
               name: animal1.name,
@@ -160,7 +152,7 @@ const getAllAnimals = (req, res) => {
   pool.query(getAllAnimalsQuer)
     .then(results => {
       res.json(results.rows);
-      console.log(res)
+      console.log('Get All Animals')
     })
     .catch(err => console.log(err));
 }
