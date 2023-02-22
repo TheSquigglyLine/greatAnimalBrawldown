@@ -148,7 +148,7 @@ const getNewAnimals = (req, res) => {
 
 }
 const getAllAnimals = (req, res) => {
-  const getAllAnimalsQuer = 'SELECT id, name, elo, ROUND(((elo - (SELECT MIN(elo) FROM animals))::numeric / ((SELECT MAX(elo) FROM animals) - (SELECT MIN(elo) FROM animals))::numeric * 100)) AS elo_percentage, wikilink, ratings FROM animals ORDER BY elo DESC'
+  const getAllAnimalsQuer = 'SELECT id, name, ROUND(((elo - (SELECT MIN(elo) FROM animals))::numeric / ((SELECT MAX(elo) FROM animals) - (SELECT MIN(elo) FROM animals))::numeric * 100)) AS elo_percentage, wikilink, ratings FROM animals ORDER BY elo DESC'
   pool.query(getAllAnimalsQuer)
     .then(results => {
       res.json(results.rows);
