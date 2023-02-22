@@ -203,9 +203,9 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 .leaderboard-bar-text {
   color: hsl(0, 0%, 10%) ;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: bold;
-  margin-top: 6px;
+  margin-top: 3px;
   margin-left: 15px;
 }
 .leaderbaord-link:hover {
