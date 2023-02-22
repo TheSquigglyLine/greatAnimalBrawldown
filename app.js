@@ -14,13 +14,7 @@ app.use(express.static('build')); // serve static files (css & js) from the 'pub
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-/* app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'), function(err) {
-    if (err) {
-      res.status(500).send(err)
-    }
-  })
-}) */
+
 app.get('/api/animals', (req, res) => { // route root directory ('/' is this file (app.js))
   services.getNewAnimals(req, res);
 });
@@ -33,7 +27,13 @@ app.get('/api/animals/new-animals', (req, res) => {
 app.get('/api/animals/all-animals', (req, res) => {
   services.getAllAnimals(req, res);
 });
-
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
 app.listen(PORT, () => { // start server and listen on specified port
   console.log(`App is running on ${PORT}`) // confirm server is running and log port to the console
 }) 
