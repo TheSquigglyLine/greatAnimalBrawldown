@@ -1,4 +1,3 @@
-import { useState } from "react"
 import LeaderboardElement from "./LeaderboardElement"
 
 const Leaderboard = ({animals}) => {

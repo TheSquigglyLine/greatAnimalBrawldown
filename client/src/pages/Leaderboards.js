@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import animalService from '../services/animals'
 import Leaderboard from "../components/Leaderboard"
-import LeaderboardFilter from '../components/LeaderboardFilter';
+/* import LeaderboardFilter from '../components/LeaderboardFilter'; */
 
 const Leaderboards = () => {
 
@@ -9,7 +9,6 @@ const Leaderboards = () => {
         {
             id: 1,
             name: 'test 1 abc',
-            elo: 20,
             elo_percentage: 80,
             wikilink: 'https://wikipedia.org/wiki/boar',
             ratings: 200
@@ -17,8 +16,7 @@ const Leaderboards = () => {
         {
             id: 2,
             name: 'test 2 abd',
-            elo: 30,
-            elo_percentage: 20,
+            elo_percentage: 0,
             wikilink: 'https://wikipedia.org/wiki/boar',
             ratings: 200
         }]);
