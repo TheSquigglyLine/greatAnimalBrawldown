@@ -10,8 +10,7 @@ const PORT = process.env.PORT || 5000; // use either the host env var port (PORT
 
 app.use(cors()); // Enable CORS 
 app.use(express.json()); // Recognize Request Objects as JSON objects
-app.use(express.static('build'));
-app.use(express.static('public')); // serve static files (css & js) from the 'public' directory
+app.use(express.static('build')); // serve static files (css & js) from the 'public' directory
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
