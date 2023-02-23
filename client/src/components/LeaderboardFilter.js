@@ -1,25 +1,40 @@
 import { useState } from 'react'
 
-const LeaderboardFilter = ({filterAnimals}) => {
+const LeaderboardFilter = ({ animals, setFilteredAnimals }) => {
     const [text, setText] = useState('')
 
     const onChange = (event) => {
         event.preventDefault()
+        setText(event.target.value.toLowerCase())
 
-        /* if (!text){
+        if (!event.target.value) {
+            setFilteredAnimals(animals)
+            console.log('empty')
             return
-        } */
-        filterAnimals(text)
+        }
+        filterAnimals(event.target.value)
+    }
+
+    const filterAnimals = async (filter) => {
+        const filteredList = animals.filter((item) => {
+            return item === filter.toLowerCase() || item.name.toLowerCase().includes(filter.toLowerCase());
+        });
+        setFilteredAnimals(filteredList)
     }
 
     return (
-        <div className='form-control'>
+        <div class="form__group field">
             <input
-                type='text'
-                placeholder='Name'
+                class="form__field" 
+                placeholder="Name" 
+                name="name" 
+                id='name' 
+                required
+                type='input'
                 value={text}
-                onChange={(e) => onChange(e)}
+                onChange={onChange}
             />
+            <label for="name" class="form__label">Name</label>
         </div>
     )
 }

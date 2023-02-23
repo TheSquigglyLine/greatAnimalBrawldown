@@ -8,18 +8,19 @@ const Leaderboards = () => {
     const [animals, setAnimals] = useState([
         {
             id: 1,
-            name: 'test 1 abc',
+            name: 'Test 1 abc',
             elo_percentage: 80,
             wikilink: 'https://wikipedia.org/wiki/boar',
             ratings: 200
         },
         {
             id: 2,
-            name: 'test 2 abd',
+            name: 'Test 2 ABD',
             elo_percentage: 0,
             wikilink: 'https://wikipedia.org/wiki/boar',
             ratings: 200
         }]);
+    const [filteredAnimals, setFilteredAnimals] = useState([])
 
     /* const filterAnimals = async (filter) => {
         const filteredList = animals.filter((item) => {
@@ -44,6 +45,7 @@ const Leaderboards = () => {
             .then(data => {
                 if (Array.isArray(data)) {
                     setAnimals(data);
+                    setFilteredAnimals(animals);
                 }
             })
     }, []);
@@ -53,7 +55,7 @@ const Leaderboards = () => {
             <h1 className="header">Leaderboard</h1>
             <div className="container">
                 {/* <LeaderboardFilter filterAnimals={filterAnimals} /> */}
-                <Leaderboard animals={animals} />
+                <Leaderboard animals={animals} filteredAnimals={filteredAnimals} setFilteredAnimals={setFilteredAnimals}/>
             </div>
         </main>
     )

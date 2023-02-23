@@ -13,7 +13,13 @@ const postAnimalChoice = (animal1, animal2, choice) => {
     return response.data
   })
 }
-
+const postAnimalSuggestion = (suggestion) => {
+  const data = { suggestion }
+  const request = axios.post(`${baseUrl}/animal-suggest`, data)
+  return request.then(response => {
+    return response.data
+  })
+}
 const getAnimalChoices = () => {
   const request = axios.get(`${baseUrl}/new-animals`)
   return request.then(response => response.data)
@@ -23,4 +29,4 @@ const getAllAnimals = () => {
   return request.then(response => response.data)
 }
 
-export default { postAnimalChoice, getAnimalChoices, getAllAnimals }
+export default { postAnimalChoice, getAnimalChoices, getAllAnimals, postAnimalSuggestion }

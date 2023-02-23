@@ -3,6 +3,7 @@ import { push as Menu } from 'react-burger-menu'
 import { Link } from "react-router-dom";
 import { FaHome, FaQuestion } from "react-icons/fa";
 import { MdLeaderboard } from "react-icons/md";
+import { AiOutlineForm } from "react-icons/ai";
 class Navigation extends React.Component {
     constructor(props) {
         super(props)
@@ -45,6 +46,10 @@ class Navigation extends React.Component {
                 <Link to="/Leaderbaords" onClick={() => { this.closeMenu(); }}>
                     <MdLeaderboard />
                     <span>Leaderboard</span>
+                </Link>
+                <Link to="/Suggest" onClick={() => { this.closeMenu(); }}>
+                    <AiOutlineForm />
+                    <span>Suggest</span>
                 </Link>
                 <Link to="/About" onClick={() => { this.closeMenu(); }}>
                     <FaQuestion />

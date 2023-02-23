@@ -5,6 +5,7 @@ import About from "./pages/About"
 import { Route, Routes } from 'react-router-dom'
 import Leaderboards from './pages/Leaderboards'
 import Footer from './components/Footer'
+import Suggestion from './pages/Suggestion'
 
 function App() {
 
@@ -13,8 +14,8 @@ function App() {
       <Navigation pageWrapId={"page-wrap"} outerContainerId={"outer-container"} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
         <Route path="/leaderbaords" element={<Leaderboards />} />
+        <Route path="/about" element={<About />} />
       </Routes>
       <Footer/>
     </div>

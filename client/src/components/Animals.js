@@ -1,5 +1,5 @@
 import React from 'react'
-import { RiSwordLine } from "react-icons/ri";
+/* import { RiSwordLine } from "react-icons/ri"; */
 
 const Animals = ({ animateButtonClick, name1, name2, isSlidOut, wikilink1, wikilink2 }) => {
   return (
