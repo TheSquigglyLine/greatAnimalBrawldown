@@ -25,6 +25,7 @@ const About = () => {
           amazing animals in action, and have a ton of fun along the way. Thanks for visiting AnimalFight.org, where every day is
           a new adventure!
         </p>
+        <img src="public/animalimages/Aardvark.jpg" alt="Aardvark" />
       </div>
     </main>
   )

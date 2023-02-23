@@ -5,7 +5,6 @@ import About from "./pages/About"
 import { Route, Routes } from 'react-router-dom'
 import Leaderboards from './pages/Leaderboards'
 import Footer from './components/Footer'
-import Suggestion from './pages/Suggestion'
 
 function App() {
 
