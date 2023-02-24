@@ -9,7 +9,7 @@ const pool = new Pool({ // create connection to database
 });
 
 const getEloRatings = (name1, name2) => {
-  const eloString = `SELECT elo FROM animals WHERE name IN ($1, $2) ORDER BY CASE name WHEN $1 THEN 1 WHEN $2 THEN 2 END`;
+  const eloString = `SELECT elo, ratings FROM animals WHERE name IN ($1, $2) ORDER BY CASE name WHEN $1 THEN 1 WHEN $2 THEN 2 END`;
   const values = [name1, name2];
   return pool.query(eloString, values)
     .then(result => result.rows)
@@ -17,7 +17,7 @@ const getEloRatings = (name1, name2) => {
 }
 
 
-const updateEloRating = (animal1Elo, animal2Elo, animal1Win, K = 32) => {
+const updateEloRating = (animal1Elo, animal2Elo, animal1Win, animal1_count, animal2_count ) => {
   // Constants for Elo calculation
   const expectedScore = (rating1, rating2) => 1 / (1 + Math.pow(10, (rating1 - rating2) / 400));
 
@@ -25,9 +25,12 @@ const updateEloRating = (animal1Elo, animal2Elo, animal1Win, K = 32) => {
   const player1Score = animal1Win ? 1 : 0;
   const player2Score = animal1Win ? 0 : 1;
 
+  const K1 = Math.max(4, 40 - (animal1_count / 15));
+  const K2 = Math.max(4, 40 - (animal2_count / 15));
+
   // Calculate new Elo ratings based on game result
-  const player1NewElo = animal1Elo + K * (player1Score - expectedScore(animal2Elo, animal1Elo));
-  const player2NewElo = animal2Elo + K * (player2Score - expectedScore(animal1Elo, animal2Elo));
+  const player1NewElo = animal1Elo + K1 * (player1Score - expectedScore(animal2Elo, animal1Elo));
+  const player2NewElo = animal2Elo + K2 * (player2Score - expectedScore(animal1Elo, animal2Elo));
 
   // Return updated Elo ratings
   return [Math.round(player1NewElo), Math.round(player2NewElo)];
@@ -57,7 +60,7 @@ const processAnimalChoice = (req, res) => {
   getEloRatings(animal1Str, animal2Str)
     .then(ratings => {
 
-      const newRatings = updateEloRating(ratings[0].elo, ratings[1].elo, animal1win);
+      const newRatings = updateEloRating(ratings[0].elo, ratings[1].elo, animal1win, ratings[0].ratings, ratings[1].ratings);
 
       console.log(animal1Str + " rating change: " + ratings[0].elo + " -> " + newRatings[0]);
       console.log(animal2Str + " rating change: " + ratings[1].elo + " -> " + newRatings[1]);
@@ -92,7 +95,7 @@ const processAnimalChoice = (req, res) => {
 
   getRandomElo()
     .then(elo => {
-      const getNewAnimalsQuery = "SELECT * FROM (SELECT name, wikilink, ratings FROM animals ORDER BY ABS(elo - $1) LIMIT 50) subquery WHERE subquery.name NOT IN ($2, $3)";
+      const getNewAnimalsQuery = "SELECT * FROM (SELECT name, wikilink, ratings FROM animals ORDER BY ABS(elo - $1) LIMIT 30) subquery WHERE subquery.name NOT IN ($2, $3)";
       const data = [elo, animal1Str, animal2Str]
       pool.query(getNewAnimalsQuery, data)
         .then(result => {
