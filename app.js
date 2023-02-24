@@ -1,4 +1,6 @@
-const express = require('express'); // import express module (simplifies routing/requests, among other things)
+const express = require('express');
+var http = require('http');
+var enforce = require('express-sslify'); // import express module (simplifies routing/requests, among other things)
 const cors = require('cors'); // import the CORS library to allow Cross-origin resource sharing
 const path = require('path');
 const app = express(); // create an instance of the express module (app is the conventional variable name used)
@@ -14,6 +16,7 @@ app.use(express.json()); // Recognize Request Objects as JSON objects
 app.use(express.static('build')); // serve static files (css & js) from the 'public' directory
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
 
 app.get('/api/animals', (req, res) => { // route root directory ('/' is this file (app.js))
@@ -35,6 +38,6 @@ app.get('/*', function(req, res) {
     }
   })
 })
-app.listen(PORT, () => { // start server and listen on specified port
-  console.log(`App is running on ${PORT}`) // confirm server is running and log port to the console
-}) 
+http.createServer(app).listen(app.get('port'), function() {
+  console.log('Express server listening on port ' + app.get('port'));
+});
