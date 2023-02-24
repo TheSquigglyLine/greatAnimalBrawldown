@@ -98,6 +98,9 @@ const processAnimalChoice = (req, res) => {
         .then(result => {
           const rows = result.rows;
           const randomIndices = [Math.floor(Math.random() * rows.length), Math.floor(Math.random() * rows.length)];
+          while (randomIndices[0] === randomIndices[1]) {
+            randomIndices = [Math.floor(Math.random() * rows.length), Math.floor(Math.random() * rows.length)];
+          }
           const animal1 = rows[randomIndices[0]];
           const animal2 = rows[randomIndices[1]];
           const response = {
