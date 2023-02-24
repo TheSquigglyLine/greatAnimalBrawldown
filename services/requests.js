@@ -97,10 +97,9 @@ const processAnimalChoice = (req, res) => {
       pool.query(getNewAnimalsQuery, data)
         .then(result => {
           const rows = result.rows;
-          rows.sort((a, b) => a.ratings - b.ratings);
-          const lowestRatings = rows.slice(0, 2);
-          const animal1 = lowestRatings[0];
-          const animal2 = lowestRatings[1];
+          const randomIndices = [Math.floor(Math.random() * rows.length), Math.floor(Math.random() * rows.length)];
+          const animal1 = rows[randomIndices[0]];
+          const animal2 = rows[randomIndices[1]];
           const response = {
             animal1: {
               name: animal1.name,
