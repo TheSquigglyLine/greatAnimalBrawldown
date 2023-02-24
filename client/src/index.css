@@ -45,20 +45,42 @@ main {
 .left-button,
 .right-button {
   display: block;
-  min-height: 140px;
+  height: 150px;
   width: 300px;
   font-size: 24px;
   color: #fff;
-  padding: 15px 15px;
+  padding: 0px 0px;
   margin-bottom: 8px;
   font-weight: bold;
   cursor: pointer;
-  border-radius: 5px;
+  overflow: hidden;
+  border-radius: 15px;
   border: none;
-  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
-    7px 7px 20px 0px rgba(47, 116, 245, 0.479),
+  box-shadow: 7px 7px 20px 0px rgba(47, 116, 245, 0.479),
     4px 4px 5px 0px rgba(69, 94, 141, 0.699);
   background: #0086e0;
+  position: relative;
+}
+.left-button::before,
+.right-button::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0px 0px 22px 12px #202020;
+  border-radius: 15px;
+  border: 2px solid #0086e0;
+}
+.button-img{
+  width: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
 }
 .fight-symbol {
   align-items: center;
@@ -71,7 +93,13 @@ main {
 }
 .left-button:active,
 .right-button:active {
+  box-shadow: 7px 7px 20px 0px rgba(47, 245, 80, 0.479),
+    4px 4px 5px 0px rgba(69, 141, 79, 0.699);
   top: 2px;
+}
+.left-button:active::before,
+.right-button:active::before {
+  border: 2px solid #32a852;
 }
 .button-Container-left,
 .button-Container-right {
@@ -91,7 +119,7 @@ main {
   color: rgb(2, 206, 250);
   text-decoration: none;
   font-family: Arial, sans-serif;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
 }
 .wikilink:hover {
